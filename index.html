@@ -3,208 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐱 Mèo Mun Simulator</title>
+    <title>Flappy Bird</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="game">
+<div id="game">
 
-    <h1>🐱 Mèo Mun</h1>
+    <div id="score">0</div>
 
-    <div class="info">
-        <div class="card">
-            <div>⭐ Level</div>
-            <strong id="level">1</strong>
-        </div>
+    <div id="bird">🐦</div>
 
-        <div class="card">
-            <div>💰 Coin</div>
-            <strong id="coins">0</strong>
-        </div>
-
-        <div class="card">
-            <div>🏆 Điểm</div>
-            <strong id="score">0</strong>
-        </div>
-
-        <div class="card">
-            <div>⏰ Tuổi</div>
-            <strong id="age">0</strong>s
-        </div>
-    </div>
-
-    <div class="cat-area">
-        <div id="cat" class="cat">🐱</div>
-    </div>
-
-    <div class="stat">
-        <div class="stat-label">❤️ Sức khỏe</div>
-        <div class="bar">
-            <div id="healthBar" class="fill health"></div>
-        </div>
-    </div>
-
-    <div class="stat">
-        <div class="stat-label">🍖 No bụng</div>
-        <div class="bar">
-            <div id="hungerBar" class="fill hunger"></div>
-        </div>
-    </div>
-
-    <div class="stat">
-        <div class="stat-label">😴 Năng lượng</div>
-        <div class="bar">
-            <div id="energyBar" class="fill energy"></div>
-        </div>
-    </div>
-
-    <div class="stat">
-        <div class="stat-label">😊 Hạnh phúc</div>
-        <div class="bar">
-            <div id="happyBar" class="fill happy"></div>
-        </div>
-    </div>
-
-    <div class="actions">
-        <button class="feed" onclick="feedCat()">🍖 Cho ăn</button>
-        <button class="play" onclick="playCat()">🎾 Chơi</button>
-        <button class="sleep" onclick="sleepCat()">😴 Ngủ</button>
-    </div>
-
-    <div id="message" class="message"></div>
-
-    <div class="footer">
-        Game tự động lưu dữ liệu 💾
+    <div id="gameOver">
+        <h1>Game Over</h1>
+        <p>Nhấn Space để chơi lại</p>
     </div>
 
 </div>
 
-<script>
-let pet = JSON.parse(localStorage.getItem("catPet")) || {
-    health:100,
-    hunger:100,
-    energy:100,
-    happy:100,
-    coins:0,
-    score:0,
-    level:1,
-    age:0,
-    alive:true
-};
-
-function save(){
-    localStorage.setItem("catPet", JSON.stringify(pet));
-}
-
-function clamp(v){
-    return Math.max(0, Math.min(100, v));
-}
-
-function updateUI(){
-
-    document.getElementById("healthBar").style.width = pet.health + "%";
-    document.getElementById("hungerBar").style.width = pet.hunger + "%";
-    document.getElementById("energyBar").style.width = pet.energy + "%";
-    document.getElementById("happyBar").style.width = pet.happy + "%";
-
-    document.getElementById("coins").innerText = pet.coins;
-    document.getElementById("score").innerText = pet.score;
-    document.getElementById("level").innerText = pet.level;
-    document.getElementById("age").innerText = pet.age;
-
-    const cat = document.getElementById("cat");
-
-    if(!pet.alive){
-        cat.innerHTML = "💀";
-        cat.classList.add("sleeping");
-    }
-}
-
-function showMessage(text){
-    document.getElementById("message").innerText = text;
-}
-
-function feedCat(){
-
-    if(!pet.alive) return;
-
-    pet.hunger = clamp(pet.hunger + 20);
-    pet.health = clamp(pet.health + 5);
-
-    showMessage("😋 Mèo ăn ngon lành!");
-
-    save();
-    updateUI();
-}
-
-function playCat(){
-
-    if(!pet.alive) return;
-
-    if(pet.energy < 10){
-        showMessage("🥱 Mèo quá mệt để chơi.");
-        return;
-    }
-
-    pet.happy = clamp(pet.happy + 20);
-    pet.energy = clamp(pet.energy - 10);
-    pet.coins += 5;
-    pet.score += 10;
-
-    showMessage("🎾 Mèo rất vui!");
-
-    save();
-    updateUI();
-}
-
-function sleepCat(){
-
-    if(!pet.alive) return;
-
-    pet.energy = clamp(pet.energy + 25);
-    pet.health = clamp(pet.health + 5);
-
-    showMessage("😴 Mèo ngủ ngon.");
-    
-    save();
-    updateUI();
-}
-
-function gameLoop(){
-
-    if(!pet.alive) return;
-
-    pet.age++;
-
-    pet.hunger -= 1;
-    pet.energy -= 1;
-    pet.happy -= 0.5;
-
-    if(pet.hunger < 20) pet.health -= 1;
-    if(pet.energy < 10) pet.health -= 1;
-    if(pet.happy < 10) pet.health -= 1;
-
-    pet.hunger = clamp(pet.hunger);
-    pet.energy = clamp(pet.energy);
-    pet.happy = clamp(pet.happy);
-    pet.health = clamp(pet.health);
-
-    pet.score++;
-    pet.level = Math.floor(pet.score / 100) + 1;
-
-    if(pet.health <= 0){
-        pet.alive = false;
-        showMessage("☠️ Mèo đã kiệt sức!");
-    }
-
-    save();
-    updateUI();
-}
-
-updateUI();
-setInterval(gameLoop, 1000);
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
