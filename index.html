@@ -3,23 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flappy Bird</title>
+
+    <title>Đặt Nước</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div id="game">
+<div class="app">
 
-    <div id="score">0</div>
+    <div class="header">
+        <div class="header-icon">🥤</div>
 
-    <div id="bird">🐦</div>
+        <div>
+            <h1>Đặt Nước</h1>
+            <p>Chọn nước uống của bạn</p>
+        </div>
+    </div>
 
-    <div id="gameOver">
-        <h1>Game Over</h1>
-        <p>Nhấn Space để chơi lại</p>
+
+    <div class="form-card">
+
+        <!-- TÊN -->
+        <div class="form-group">
+            <label>Tên người đặt</label>
+
+            <select id="name">
+                <option value="">-- Chọn tên --</option>
+                <option>Nguyễn Văn An</option>
+                <option>Trần Văn Bình</option>
+                <option>Lê Minh Cường</option>
+                <option>Phạm Quốc Dũng</option>
+                <option>Nguyễn Thị Hà</option>
+                <option>Trần Thị Lan</option>
+                <option>Lê Hoàng Nam</option>
+                <option>Phạm Minh Tuấn</option>
+            </select>
+        </div>
+
+
+        <!-- MÓN -->
+        <div class="form-group">
+            <label>Đặt món gì?</label>
+
+            <select id="drink">
+                <option value="">-- Chọn món --</option>
+                <option>Trà sữa</option>
+                <option>Trà đào</option>
+                <option>Trà chanh</option>
+                <option>Cà phê sữa</option>
+                <option>Cà phê đen</option>
+                <option>Bạc xỉu</option>
+                <option>Nước cam</option>
+                <option>Nước ép dưa hấu</option>
+                <option>Matcha Latte</option>
+                <option>Chocolate</option>
+            </select>
+        </div>
+
+
+        <!-- SIZE -->
+        <div class="form-group">
+            <label>Size</label>
+
+            <select id="size">
+                <option value="S">S</option>
+                <option value="M" selected>M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+            </select>
+        </div>
+
+
+        <!-- TÙY CHỌN -->
+        <div class="form-group">
+
+            <label>Tùy chọn</label>
+
+            <div class="options">
+
+                <label class="option">
+                    <input type="checkbox" id="lessSugar">
+                    <span>Ít đường</span>
+                </label>
+
+                <label class="option">
+                    <input type="checkbox" id="lessIce">
+                    <span>Ít đá</span>
+                </label>
+
+                <label class="option">
+                    <input type="checkbox" id="separateIce">
+                    <span>Đá riêng</span>
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- SỐ LƯỢNG -->
+        <div class="form-group">
+
+            <label>Số lượng</label>
+
+            <div class="quantity">
+
+                <button type="button" onclick="changeQuantity(-1)">
+                    −
+                </button>
+
+                <span id="quantity">1</span>
+
+                <button type="button" onclick="changeQuantity(1)">
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button class="add-button" onclick="addOrder()">
+            + Thêm vào đơn
+        </button>
+
+    </div>
+
+
+    <!-- DANH SÁCH ĐẶT -->
+    <div class="order-card">
+
+        <div class="order-header">
+
+            <h2>Đơn nước</h2>
+
+            <span id="totalDrinks">0 ly</span>
+
+        </div>
+
+
+        <div id="orderList">
+
+            <div class="empty">
+                Chưa có món nào được đặt
+            </div>
+
+        </div>
+
+
+        <button
+            class="confirm-button"
+            onclick="confirmOrder()">
+
+            ✓ Xác nhận đặt nước
+
+        </button>
+
+    </div>
+
+
+</div>
+
+
+<div id="successMessage">
+
+    <div class="success-box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>Đặt nước thành công!</h2>
+
+        <p>Đơn nước của bạn đã được ghi nhận.</p>
+
+        <button onclick="closeSuccess()">
+            Đóng
+        </button>
+
     </div>
 
 </div>
+
 
 <script src="script.js"></script>
 
