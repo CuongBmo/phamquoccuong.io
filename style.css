@@ -5,69 +5,532 @@
 }
 
 body{
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5f7fa,
+            #e8f5e9
+        );
+
+    min-height:100vh;
+
+    padding:30px 15px;
+
+    color:#333;
+}
+
+
+.app{
+
+    width:100%;
+    max-width:650px;
+
+    margin:auto;
+}
+
+
+/* HEADER */
+
+.header{
+
     display:flex;
-    justify-content:center;
+
     align-items:center;
-    height:100vh;
-    background:#70c5ce;
-    overflow:hidden;
-    font-family:Arial,sans-serif;
+
+    gap:15px;
+
+    margin-bottom:20px;
 }
 
-#game{
-    position:relative;
-    width:400px;
-    height:600px;
-    background:linear-gradient(#70c5ce,#c0f0ff);
-    overflow:hidden;
-    border:4px solid #333;
-}
+.header-icon{
 
-#bird{
-    position:absolute;
-    left:80px;
-    top:250px;
-    font-size:40px;
-    z-index:10;
-}
-
-.pipe{
-    position:absolute;
     width:60px;
-    background:#2ecc71;
-}
+    height:60px;
 
-.topPipe{
-    top:0;
-}
-
-.bottomPipe{
-    bottom:0;
-}
-
-#score{
-    position:absolute;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:32px;
-    font-weight:bold;
-    color:white;
-    z-index:100;
-}
-
-#gameOver{
-    position:absolute;
-    inset:0;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    background:rgba(0,0,0,.6);
-    color:white;
-    z-index:200;
-}
-
-#gameOver.show{
     display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    font-size:32px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.08);
+}
+
+.header h1{
+
+    font-size:28px;
+
+    margin-bottom:4px;
+}
+
+.header p{
+
+    color:#777;
+
+    font-size:14px;
+}
+
+
+/* CARD */
+
+.form-card,
+.order-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    margin-bottom:20px;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.08);
+}
+
+
+/* FORM */
+
+.form-group{
+
+    margin-bottom:18px;
+}
+
+.form-group > label{
+
+    display:block;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+    font-size:15px;
+}
+
+
+/* SELECT */
+
+select{
+
+    width:100%;
+
+    height:48px;
+
+    padding:0 14px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    background:white;
+
+    font-size:15px;
+
+    outline:none;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+select:focus{
+
+    border-color:#4caf50;
+
+    box-shadow:
+        0 0 0 3px rgba(76,175,80,.12);
+}
+
+
+/* OPTIONS */
+
+.options{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+}
+
+.option{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:#f7f7f7;
+
+    padding:10px 13px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:14px;
+}
+
+.option input{
+
+    width:17px;
+    height:17px;
+
+    cursor:pointer;
+}
+
+
+/* QUANTITY */
+
+.quantity{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+.quantity button{
+
+    width:42px;
+    height:42px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#f1f1f1;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.quantity button:hover{
+
+    background:#e0e0e0;
+}
+
+#quantity{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    min-width:25px;
+
+    text-align:center;
+}
+
+
+/* ADD */
+
+.add-button{
+
+    width:100%;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:11px;
+
+    background:#4caf50;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.add-button:hover{
+
+    background:#43a047;
+
+    transform:translateY(-1px);
+}
+
+
+/* ORDER */
+
+.order-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+}
+
+.order-header h2{
+
+    font-size:20px;
+}
+
+#totalDrinks{
+
+    background:#e8f5e9;
+
+    color:#2e7d32;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+    font-weight:bold;
+}
+
+
+/* EMPTY */
+
+.empty{
+
+    text-align:center;
+
+    color:#999;
+
+    padding:25px 10px;
+}
+
+
+/* ORDER ITEM */
+
+.order-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:15px 0;
+
+    border-bottom:1px solid #eee;
+}
+
+.order-info{
+
+    flex:1;
+}
+
+.order-name{
+
+    font-weight:bold;
+
+    font-size:16px;
+
+    margin-bottom:5px;
+}
+
+.order-detail{
+
+    font-size:13px;
+
+    color:#777;
+
+    line-height:1.5;
+}
+
+.order-quantity{
+
+    font-weight:bold;
+
+    white-space:nowrap;
+}
+
+.delete-button{
+
+    border:none;
+
+    background:#ffebee;
+
+    color:#e53935;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:16px;
+}
+
+
+/* CONFIRM */
+
+.confirm-button{
+
+    width:100%;
+
+    height:50px;
+
+    margin-top:20px;
+
+    border:none;
+
+    border-radius:11px;
+
+    background:#2196f3;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.confirm-button:hover{
+
+    background:#1976d2;
+}
+
+
+/* SUCCESS */
+
+#successMessage{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.5);
+
+    padding:20px;
+
+    z-index:1000;
+}
+
+#successMessage.show{
+
+    display:flex;
+}
+
+.success-box{
+
+    width:100%;
+
+    max-width:400px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:35px 25px;
+
+    text-align:center;
+}
+
+.success-icon{
+
+    width:65px;
+    height:65px;
+
+    margin:0 auto 15px;
+
+    border-radius:50%;
+
+    background:#4caf50;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:35px;
+}
+
+.success-box h2{
+
+    margin-bottom:10px;
+}
+
+.success-box p{
+
+    color:#777;
+
+    margin-bottom:20px;
+}
+
+.success-box button{
+
+    border:none;
+
+    background:#4caf50;
+
+    color:white;
+
+    padding:12px 30px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    body{
+
+        padding:15px 10px;
+    }
+
+    .form-card,
+    .order-card{
+
+        padding:17px;
+    }
+
+    .options{
+
+        flex-direction:column;
+    }
+
+    .option{
+
+        width:100%;
+    }
+
 }
